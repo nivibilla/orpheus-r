@@ -1,2 +1,2 @@
 # orpheus-r
-Training Orpheus with Reinforcement Learning
+Training Orpheus (LLM backbone TTS model) with Reinforcement Learning
