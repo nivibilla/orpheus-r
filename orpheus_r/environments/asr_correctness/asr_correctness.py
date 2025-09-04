@@ -52,8 +52,12 @@ def load_environment(
                 ).to_openai(exclude=("top_p", "seed"))
             ).text
 
-            difference = editdistance.eval(transcribed_text, answer)
-            return round(((len(answer) - difference)/len(answer))**2, 2)
+            difference = editdistance.eval(transcribed_text.lower(), answer.lower()) * 2
+            score = round(((len(answer) - difference)/len(answer)), 2)
+            if score < 0:
+                return 0
+            else:
+                return score
         except Exception as e:
             return 0.0
     
