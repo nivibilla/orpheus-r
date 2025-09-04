@@ -30,7 +30,7 @@ def load_environment(
             "Authorization": f"Bearer {api_token}"
         }
         data = {
-            "generated_text": completion[0]['content']
+            "generated_text": completion[-1]['content']
         }
         decoded_audio_response = requests.post(audio_decoder_url, headers=headers, json=data)
         base64_string = decoded_audio_response.json()['audio_array_base64']
