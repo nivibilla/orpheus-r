@@ -30,7 +30,7 @@ def load_environment(
             "Authorization": f"Bearer {api_token}"
         }
         data = {
-            "generated_text": completion
+            "generated_text": completion[0]['content']
         }
         decoded_audio_response = requests.post(audio_decoder_url, headers=headers, json=data)
         base64_string = decoded_audio_response.json()['audio_array_base64']
@@ -52,7 +52,7 @@ def load_environment(
         ).text
 
         difference = editdistance.eval(transcribed_text, answer)
-        return round((difference / len(answer))**2, 2)
+        return round(((len(answer) - difference)/len(answer))**2, 2)
     
     rubric = vf.Rubric(funcs=[correct_answer], weights=[1.0])
 
