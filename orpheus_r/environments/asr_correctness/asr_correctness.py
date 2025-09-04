@@ -14,10 +14,16 @@ def load_environment(
     stt_client_url,
     audio_decoder_url,
     api_token,
+    split='train',
     **kwargs
 ) -> vf.Environment:
     # Login using e.g. `huggingface-cli login` to access this dataset
-    ds = load_dataset("srinivasbilla/orpheus-r-10k", split='train')
+    assert split in ['train', 'test', 'dev']
+
+    if split == 'dev':
+        ds = load_dataset("srinivasbilla/orpheus-r-10k", split='train').select(range(8))
+    else:
+        ds = load_dataset("srinivasbilla/orpheus-r-10k", split=split)
 
     def correct_answer(completion, answer):
         headers = {
