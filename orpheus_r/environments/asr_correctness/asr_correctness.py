@@ -61,6 +61,3 @@ def load_environment(
         rubric=rubric,
         **kwargs
     )
-
-
-vf.load_environment()
